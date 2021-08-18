@@ -36,15 +36,17 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qi5-E4-AEg">
                                                         <rect key="frame" x="0.0" y="0.0" width="106" height="54"/>
-                                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="Kgl-wb-MFj"/>
                                                             <constraint firstAttribute="height" constant="54" id="xEF-ab-fyn"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
                                                         <state key="normal" title="10%">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="titleColor" systemColor="systemGreenColor"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="tipChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kv5-YE-aEV"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sjt-uS-l9m">
                                                         <rect key="frame" x="134" y="0.0" width="106" height="54"/>
@@ -56,6 +58,9 @@
                                                         <state key="normal" title="15%">
                                                             <color key="titleColor" systemColor="systemGreenColor"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="tipChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gd2-Dx-F3c"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FKV-AA-qsy">
                                                         <rect key="frame" x="268" y="0.0" width="106" height="54"/>
@@ -67,6 +72,9 @@
                                                         <state key="normal" title="20%">
                                                             <color key="titleColor" systemColor="systemGreenColor"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="tipChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IeU-uO-Wu4"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -91,11 +99,14 @@
                                                         <color key="textColor" systemColor="systemGreenColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="37L-PB-DbY">
+                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="37L-PB-DbY">
                                                         <rect key="frame" x="200" y="0.0" width="174" height="39"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="39" id="ngK-jY-l9U"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <action selector="stepperValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Lxi-8Y-g6Z"/>
+                                                        </connections>
                                                     </stepper>
                                                 </subviews>
                                             </stackView>
@@ -160,6 +171,9 @@
                                 <state key="normal" title="Calculate">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="calculatePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dIo-u5-IBQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -176,6 +190,15 @@
                             <constraint firstItem="As2-tG-naq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rSp-HR-Mfz"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="billTextField" destination="QRR-nF-8NU" id="xz1-Y5-Pld"/>
+                        <outlet property="fiveTeenPcButton" destination="sjt-uS-l9m" id="5Ym-zy-Jkh"/>
+                        <outlet property="splitNumberLabel" destination="nvK-eO-J3w" id="R9K-0e-yNQ"/>
+                        <outlet property="tenPcButton" destination="qi5-E4-AEg" id="Xfa-3L-CwR"/>
+                        <outlet property="twentyPcButton" destination="FKV-AA-qsy" id="gCY-Rc-tz7"/>
+                        <outlet property="uiStepper" destination="37L-PB-DbY" id="4WU-rp-qNF"/>
+                        <segue destination="Sro-xu-XqL" kind="presentation" identifier="showResult" id="NcF-KS-CI9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -186,7 +209,7 @@
             <objects>
                 <viewController id="Sro-xu-XqL" customClass="ResultViewController" customModule="Tipsy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Sc-oP-jbi">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ue-60-EL8" userLabel="Top View">
@@ -228,7 +251,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gx-yN-XrD">
-                                <rect key="frame" x="107" y="804" width="200" height="58"/>
+                                <rect key="frame" x="107" y="750" width="200" height="58"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="CM0-KF-sbV"/>
@@ -238,6 +261,9 @@
                                 <state key="normal" title="Recalculate">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="recalculatePressed:" destination="Sro-xu-XqL" eventType="touchUpInside" id="cc8-z4-A3A"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eey-h6-N6C"/>
@@ -253,6 +279,10 @@
                             <constraint firstItem="8Ue-60-EL8" firstAttribute="top" secondItem="2Sc-oP-jbi" secondAttribute="top" id="zPa-Xs-cau"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="settingsLabel" destination="FBa-Fd-dnO" id="qkk-J7-9XT"/>
+                        <outlet property="totalLabel" destination="w1i-UA-dTn" id="Opg-JU-d1s"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="45E-Kz-MFL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
